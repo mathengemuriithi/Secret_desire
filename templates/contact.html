@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load spa_tags %}
+{% block content %}
+<section class="bg-ink py-20 text-cream md:py-28"><div class="mx-auto max-w-7xl px-5"><h1 class="font-serif text-5xl text-gold md:text-7xl">Contact</h1><p class="mt-4 max-w-2xl">Message us to book or ask a question.</p></div></section>
+<section class="mx-auto grid max-w-7xl gap-12 px-5 py-20 md:py-28 lg:grid-cols-2">
+  <div>
+    {% if sent %}
+    <div class="rounded-lg border border-gold bg-white p-6 md:p-8" role="status">
+      <h2 class="font-serif text-3xl">Thank you</h2>
+      <p class="mt-3">We received your message. For a faster reply, send the same details on WhatsApp.</p>
+      <a href="{{ sent_wa }}" target="_blank" rel="noopener" class="mt-6 inline-block rounded bg-gold px-6 py-3 font-semibold text-ink hover:bg-[#b8954f]">Continue on WhatsApp</a>
+    </div>
+    {% else %}
+    <form method="post" class="space-y-5 rounded-lg border border-ink/10 bg-white p-6 md:p-8" aria-label="Contact form">
+      {% csrf_token %}
+      {% for f in form %}
+      <div><label for="{{ f.id_for_label }}" class="mb-1 block font-semibold">{{ f.label }}</label>{{ f }}{% for e in f.errors %}<p class="mt-1 text-sm text-red-700">{{ e }}</p>{% endfor %}</div>
+      {% endfor %}
+      <button type="submit" class="w-full rounded bg-ink px-6 py-4 font-semibold text-cream hover:bg-gold hover:text-ink">Send message</button>
+    </form>
+    {% endif %}
+  </div>
+  <div class="space-y-6">
+    <div class="rounded-lg border border-ink/10 bg-white p-6 md:p-8">
+      <h2 class="font-serif text-3xl">Reach us</h2>
+      <p class="mt-3">Phone: <a class="underline" href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a></p>
+      <p>WhatsApp: <a class="underline" href="{% wa_link %}" target="_blank" rel="noopener">Start a chat</a></p>
+      <p>Email: <a class="underline" href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
+      <p>Location: {{ site_settings.location }}</p>
+      <p class="mt-3">
+        {% if site_settings.instagram_url %}<a class="mr-4 underline" href="{{ site_settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+        {% if site_settings.tiktok_url %}<a class="mr-4 underline" href="{{ site_settings.tiktok_url }}" target="_blank" rel="noopener">TikTok</a>{% endif %}
+        {% if site_settings.facebook_url %}<a class="underline" href="{{ site_settings.facebook_url }}" target="_blank" rel="noopener">Facebook</a>{% endif %}
+      </p>
+    </div>
+    <div class="rounded-lg border border-ink/10 bg-white p-6 md:p-8">
+      <h2 class="font-serif text-3xl">Opening hours</h2>
+      <table class="mt-3 w-full"><tbody>{% for day, hours in site_settings.hours_rows %}<tr class="border-b border-ink/10"><th scope="row" class="py-2 text-left font-semibold">{{ day }}</th><td class="py-2">{{ hours }}</td></tr>{% endfor %}</tbody></table>
+    </div>
+  </div>
+</section>
+{% if faqs %}
+<section class="bg-white py-20 md:py-28"><div class="mx-auto max-w-3xl px-5">
+  <h2 class="font-serif text-4xl">Frequently asked questions</h2><div class="my-6 h-px w-24 bg-gold"></div>
+  {% for q in faqs %}
+  <div class="border-b border-ink/15 py-4">
+    <button type="button" class="faq-q flex w-full items-center justify-between py-2 text-left text-lg font-semibold" aria-expanded="false" aria-controls="faq-{{ q.pk }}">{{ q.question }}<span aria-hidden="true" class="ml-4 text-gold">+</span></button>
+    <div id="faq-{{ q.pk }}" class="faq-a hidden pt-2"><p>{{ q.answer }}</p></div>
+  </div>
+  {% endfor %}
+</div></section>
+{% endif %}
+{% endblock %}

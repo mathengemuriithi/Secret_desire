@@ -1,0 +1,39 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ page_title }} | {{ site_settings.business_name }}{% endblock %}</title>
+<meta name="description" content="{% block meta_description %}{{ page_desc }}{% endblock %}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site_settings.business_name }}">
+<meta property="og:title" content="{% block og_title %}{{ page_title }} | {{ site_settings.business_name }}{% endblock %}">
+<meta property="og:description" content="{% block og_description %}{{ page_desc }}{% endblock %}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a1a'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23c9a96a'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { ink: '#1a1a1a', cream: '#f5f0e8', gold: '#c9a96a' },
+    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['Inter', 'sans-serif'] }
+  } }
+};
+</script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-cream text-ink font-sans">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2">Skip to content</a>
+{% include "partials/nav.html" %}
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+{% include "partials/footer.html" %}
+{% include "partials/whatsapp_button.html" %}
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

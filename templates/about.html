@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="bg-ink py-20 text-cream md:py-28"><div class="mx-auto max-w-7xl px-5"><h1 class="font-serif text-5xl text-gold md:text-7xl">About us</h1></div></section>
+<section class="mx-auto grid max-w-7xl gap-12 px-5 py-20 md:py-28 lg:grid-cols-2">
+  <div class="max-w-2xl reveal"><h2 class="font-serif text-4xl">Our story</h2><div class="my-6 h-px w-24 bg-gold"></div><p class="whitespace-pre-line leading-relaxed">{{ site_settings.about_story }}</p></div>
+  {% if site_settings.about_image %}<img src="{{ site_settings.about_image.url }}" alt="Inside {{ site_settings.business_name }}" class="w-full rounded-lg object-cover">{% endif %}
+</section>
+<section class="bg-white py-20 md:py-28"><div class="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-2">
+  <div class="max-w-2xl reveal"><h2 class="font-serif text-4xl">Mission</h2><p class="mt-4 leading-relaxed">{{ site_settings.about_mission }}</p></div>
+  <div class="max-w-2xl reveal"><h2 class="font-serif text-4xl">Values</h2><ul class="mt-4 list-disc space-y-1 pl-5">{% for v in site_settings.values_list %}<li>{{ v }}</li>{% endfor %}</ul></div>
+</div></section>
+{% if team %}
+<section class="mx-auto max-w-7xl px-5 py-20 md:py-28"><h2 class="font-serif text-4xl">Meet the team</h2><div class="my-6 h-px w-24 bg-gold"></div>
+  <div class="mt-10 grid gap-6 md:grid-cols-3">
+    {% for m in team %}
+    <article class="reveal rounded-lg border border-ink/10 bg-white p-6 md:p-8">
+      {% if m.photo %}<img src="{{ m.photo.url }}" alt="{{ m.name }}, {{ m.role }}" class="aspect-square w-full rounded object-cover">{% endif %}
+      <h3 class="mt-4 font-serif text-2xl">{{ m.name }}</h3><p class="font-semibold text-[#8a6d2f]">{{ m.role }}</p><p class="mt-2">{{ m.bio }}</p>
+    </article>
+    {% endfor %}
+  </div></section>
+{% endif %}
+<section class="bg-ink py-20 text-cream md:py-28"><div class="mx-auto max-w-2xl px-5"><h2 class="font-serif text-4xl text-gold">Hygiene and safety</h2><p class="mt-4 whitespace-pre-line leading-relaxed">{{ site_settings.hygiene_note }}</p></div></section>
+{% endblock %}

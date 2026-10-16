@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: secret-desire
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn secret_desire.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: secret-desire-db
+          property: connectionString
+      - key: MEDIA_ROOT
+        value: /var/data/media
+    disk:
+      name: media
+      mountPath: /var/data/media
+      sizeGb: 1
+
+databases:
+  - name: secret-desire-db
+    databaseName: secret_desire
+    plan: free

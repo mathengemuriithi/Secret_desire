@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="bg-ink py-20 text-cream md:py-28"><div class="mx-auto max-w-7xl px-5"><h1 class="font-serif text-5xl text-gold md:text-7xl">Services</h1><p class="mt-4 max-w-2xl">Pick a treatment, then book on WhatsApp.</p></div></section>
+<section class="mx-auto max-w-7xl px-5 py-20 md:py-28"><div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {% for s in services %}{% include "partials/service_card.html" with full=True %}{% empty %}<p>No services are available right now.</p>{% endfor %}
+</div></section>
+{% endblock %}
