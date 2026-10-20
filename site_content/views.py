@@ -43,6 +43,7 @@ def pricing(request):
         "page_desc": "Clear prices for every massage, facial, body treatment and package.",
         "services": _active(Service),
         "packages": _active(Package),
+         "massage_rooms": _active(GalleryImage).filter(category="rooms")[:6],
     })
 
 

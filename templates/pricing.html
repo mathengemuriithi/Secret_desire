@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load spa_tags %}
+{% load static %}
 {% block content %}
 <section class="bg-ink py-20 text-cream md:py-28"><div class="mx-auto max-w-7xl px-5"><h1 class="font-serif text-5xl text-gold md:text-7xl">Pricing</h1><p class="mt-4 max-w-2xl">{{ site_settings.price_note }}</p></div></section>
 <section class="mx-auto max-w-7xl px-5 py-20 md:py-28">
@@ -24,5 +25,36 @@
     {% endfor %}
   </div>
   {% endif %}
+</section>
+{% if massage_rooms %}
+<section class="mx-auto max-w-7xl px-5 py-20 md:py-28">
+  <h2 class="reveal font-serif text-4xl">Step inside our massage room</h2>
+  <div class="my-6 h-px w-24 bg-gold"></div>
+  <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3">
+    {% for g in massage_rooms %}
+      <img src="{{ g.image.url }}"
+           alt="{{ g.caption|default:'Massage room' }}"
+           loading="lazy"
+           class="aspect-[4/3] w-full rounded object-cover">
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+<section class="mx-auto max-w-7xl px-5 py-20 md:py-28">
+  <h2 class="reveal font-serif text-4xl">Step inside our massage room</h2>
+  <div class="my-6 h-px w-24 bg-gold"></div>
+  <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3">
+    <img src="{% static 'images/gallery/Imagestake1.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake2.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake3.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake4.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake5.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake6.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake7.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake8.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake9.jpeg' %}"  alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake10.jpeg' %}" alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+    <img src="{% static 'images/gallery/Imagestake11.jpeg' %}" alt="Massage room at Secret Desire" loading="lazy" class="aspect-[4/3] w-full rounded object-cover">
+  </div>
 </section>
 {% endblock %}
