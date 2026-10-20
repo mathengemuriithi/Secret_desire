@@ -1,10 +1,8 @@
-# Generated for Imani's contact details + location
-
 from django.db import migrations
 
-WHATSAPP = "254714635585"           # digits only, no +, no 0
-PHONE    = "+254 714 635 585"       # display format
-LOCATION = "Lavington, Nairobi, Kenya"   # ← change if Imani wants different
+WHATSAPP = "254714635585"
+PHONE    = "+254 714 635 585"
+LOCATION = "Lavington, Nairobi, Kenya"
 
 def forwards(apps, schema_editor):
     SiteSettings = apps.get_model("site_content", "SiteSettings")

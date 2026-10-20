@@ -12,11 +12,14 @@ ABOUT_STORY = (
     "for your skin and comfort."
 )
 
+NEW_EMAIL = "info@secretdesiressp.co.ke"
+
 def forwards(apps, schema_editor):
     SiteSettings = apps.get_model("site_content", "SiteSettings")
     obj = SiteSettings.objects.first()
     if obj:
         obj.about_story = ABOUT_STORY
+        obj.email = NEW_EMAIL
         obj.save()
 
 def backwards(apps, schema_editor):
@@ -24,6 +27,7 @@ def backwards(apps, schema_editor):
     obj = SiteSettings.objects.first()
     if obj:
         obj.about_story = "[placeholder] Add the story of the spa here."
+        obj.email = "info@example.com"
         obj.save()
 
 class Migration(migrations.Migration):
